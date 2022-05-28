@@ -1,6 +1,3 @@
 stable_baselines3
 tensorflow
 gym
-gym
-keras
-keras-rl2
