@@ -4,7 +4,7 @@ import numpy as np
 
 
 class MazeEnv(gym.Env):
-    def __init__(self):
+    def __init__(self, verbose = True):
         self.action_space = spaces.Discrete(4)
         self.observation_space = spaces.Box(low=0,
                                             high=4,
@@ -14,6 +14,7 @@ class MazeEnv(gym.Env):
 
         self.current_episode = 0
         self.success_episode = []
+        self.verbose = verbose
 
     def reset(self):
         self.current_player = 1
@@ -121,14 +122,14 @@ class MazeEnv(gym.Env):
     def step(self, action):
         self._take_action(action)
         self.current_step += 1
-        print(self.world)
+        if (self.verbose): print(self.world)
 
         if self.state == "W":
-            print(f'Player {self.current_player} won')
+            if (self.verbose): print(f'Player {self.current_player} won')
             reward = 200
             done = True
         elif self.state == 'L':
-            print(f'Player {self.current_player} lost')
+            if (self.verbose): print(f'Player {self.current_player} lost')
             reward = -200
             done = True
         elif self.state == 'P':
